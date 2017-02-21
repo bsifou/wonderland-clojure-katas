@@ -14,6 +14,9 @@
       (char (+ ci 32))
       c)))
 
+(defn to-lowre-case [c]
+  (Character/toLowerCase c))
+
 (defn offset [c]
   (- (int (to-lower-case c)) (int \a)))
 
@@ -52,5 +55,16 @@
 
 
 
+(map #(nth a-z (mod (- (int %1) (int %2)) 26)) 
+                                   cipher message)
 
 
+(def words (apply str (take 30 (cycle "vigilance"))))
+
+
+
+(defn shortest [s]
+  (loop [i 1]
+    (if (= (subs s 0 i) (subs s i (* 2 i)))
+      (subs s 0 i)
+      (recur (inc i)))))
